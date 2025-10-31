@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ type.typeName }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Банер навігації -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'index' %}">← Головна</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header text-center" style="background-color: #eeeeee; padding: 15px;">
+        <h1>{{ type.typeName }}</h1>
+    </div>
+
+    <div class="row">
+        {% for obj in objects %}
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    {% if obj.image %}
+                        <img src="{% static 'media/' %}{{ obj.image.name|urlencode }}" 
+                             alt="{{ obj.objName }}" 
+                             class="img-responsive">
+                    {% else %}
+                        <p><i>Фото відсутнє</i></p>
+                    {% endif %}
+                    <div class="caption">
+                        <h3>{{ obj.objName }}</h3>
+                        <p>{{ obj.descr|truncatewords:20 }}</p>
+                        <p>
+                            <a href="{% url 'arcobj' obj.id %}" class="btn btn-primary">Детальніше</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

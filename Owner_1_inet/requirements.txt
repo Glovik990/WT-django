@@ -1,0 +1,5 @@
+whitenoise
+Pillow==11.0.0
+gunicorn
+psycopg2-binary
+Django>=5.0,<6.0

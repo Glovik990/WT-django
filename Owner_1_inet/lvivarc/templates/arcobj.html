@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ obj.objName }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Банер навігації -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'index' %}">← Головна</a>
+            <a class="navbar-brand" href="{% url 'arclist' obj.objType.id %}">← Назад до списку</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header text-center" style="background-color: #eeeeee; padding: 15px;">
+        <h1>{{ obj.objName }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            {% if obj.image %}
+                <img src="{% static 'media/' %}{{ obj.image.name|urlencode }}" 
+                     alt="{{ obj.objName }}" 
+                     class="img-responsive img-thumbnail">
+            {% else %}
+                <p><i>Фото відсутнє</i></p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <h3>Опис</h3>
+            <p>{{ obj.descr }}</p>
+            <h4>Адреса:</h4>
+            <p>{{ obj.curAddr }}</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
